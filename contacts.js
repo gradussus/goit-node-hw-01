@@ -35,7 +35,7 @@ async function removeContact(contactId) {
         `Sorry. We do not delete contact with ID ${contactId}, because we do not have contact with this ID`
       );
     }
-    fs.writeFile(contactsPath, JSON.stringify(contactsAfterRemove));
+    await fs.writeFile(contactsPath, JSON.stringify(contactsAfterRemove));
     return console.log(`Success. Contact with ID ${contactId} is deleted`);
   } catch (error) {
     console.error(error);
@@ -47,7 +47,7 @@ async function addContact(name, email, phone) {
     const contacts = await listContacts();
     const newContact = { id: v4(), name, email, phone };
     contacts.push(newContact);
-    fs.writeFile(contactsPath, JSON.stringify(contacts));
+    await fs.writeFile(contactsPath, JSON.stringify(contacts));
     return newContact;
   } catch (error) {
     console.error(error);
